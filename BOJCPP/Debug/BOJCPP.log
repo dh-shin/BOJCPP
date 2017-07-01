@@ -1,0 +1,4 @@
+﻿  Source.cpp
+  LINK : C:\Users\Shin\Desktop\BOJCPP\Debug\BOJCPP.exe not found or not built by the last incremental link; performing full link
+Source.obj : error LNK2005: _main already defined in BOJCPP.obj
+C:\Users\Shin\Desktop\BOJCPP\Debug\BOJCPP.exe : fatal error LNK1169: one or more multiply defined symbols found
