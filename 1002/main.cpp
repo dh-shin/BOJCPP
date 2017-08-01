@@ -22,7 +22,15 @@ void Process()
 		if (cdist == rdist) // 중심간 거리와 반지름의 합이 같을 경우 (1)
 			printf("1\n");
 		else if (cdist < rdist) // 반지름이 더 클 경우 (2)
-			printf("2\n");
+		{
+			int rdist2 = (r1 - r2) * (r1 - r2); // 두 반지름의 차
+			if (rdist2 > cdist) // 큰 원이 작은 원을 포함 (면끼리 닿지 않음)
+				printf("0\n");
+			else if (rdist2 == cdist) // 큰 원이 작은 원을 포함 (면끼리 닿음)
+				printf("1\n");
+			else
+				printf("2\n"); // 두 원이 겹쳐있음
+		}
 		else // 중심간 거리가 더 클 경우 (0)
 			printf("0\n");
 	}
@@ -33,7 +41,5 @@ int main()
 	scanf("%d", &T);
 	while (T--)
 		Process();
-	scanf("%d", &T);
-
 	return 0;
 }
