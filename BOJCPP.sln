@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1000", "1000\1000.vcxproj", "{D3232867-A2C0-4A2A-9DF9-F430DEE22776}"
 EndProject
@@ -126,6 +126,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "11022", "11022\11022.vcxproj", "{0478C664-AB9E-4973-AD77-CA79EBB30FDB}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5565", "5565\5565.vcxproj", "{FA6591E7-9916-48FE-811B-501277614C05}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "10282", "10282\10282.vcxproj", "{A96CD393-D3CA-4A33-863D-E9871F4BF9E6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -1153,6 +1155,22 @@ Global
 		{FA6591E7-9916-48FE-811B-501277614C05}.Release|x64.ActiveCfg = Release|Win32
 		{FA6591E7-9916-48FE-811B-501277614C05}.Release|x86.ActiveCfg = Release|Win32
 		{FA6591E7-9916-48FE-811B-501277614C05}.Release|x86.Build.0 = Release|Win32
+		{A96CD393-D3CA-4A33-863D-E9871F4BF9E6}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{A96CD393-D3CA-4A33-863D-E9871F4BF9E6}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{A96CD393-D3CA-4A33-863D-E9871F4BF9E6}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{A96CD393-D3CA-4A33-863D-E9871F4BF9E6}.Debug|Win32.ActiveCfg = Debug|Win32
+		{A96CD393-D3CA-4A33-863D-E9871F4BF9E6}.Debug|Win32.Build.0 = Debug|Win32
+		{A96CD393-D3CA-4A33-863D-E9871F4BF9E6}.Debug|x64.ActiveCfg = Debug|Win32
+		{A96CD393-D3CA-4A33-863D-E9871F4BF9E6}.Debug|x86.ActiveCfg = Debug|Win32
+		{A96CD393-D3CA-4A33-863D-E9871F4BF9E6}.Debug|x86.Build.0 = Debug|Win32
+		{A96CD393-D3CA-4A33-863D-E9871F4BF9E6}.Release|Any CPU.ActiveCfg = Release|Win32
+		{A96CD393-D3CA-4A33-863D-E9871F4BF9E6}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{A96CD393-D3CA-4A33-863D-E9871F4BF9E6}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{A96CD393-D3CA-4A33-863D-E9871F4BF9E6}.Release|Win32.ActiveCfg = Release|Win32
+		{A96CD393-D3CA-4A33-863D-E9871F4BF9E6}.Release|Win32.Build.0 = Release|Win32
+		{A96CD393-D3CA-4A33-863D-E9871F4BF9E6}.Release|x64.ActiveCfg = Release|Win32
+		{A96CD393-D3CA-4A33-863D-E9871F4BF9E6}.Release|x86.ActiveCfg = Release|Win32
+		{A96CD393-D3CA-4A33-863D-E9871F4BF9E6}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
