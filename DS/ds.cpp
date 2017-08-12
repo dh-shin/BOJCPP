@@ -1,8 +1,6 @@
 #include <iostream>
 using namespace std;
 
-#define MAXN 10001
-
 class MyVec
 {
 public:
@@ -69,6 +67,63 @@ private:
 		return arr;
 	}
 
+};
+
+class Node{
+public:
+	int data;
+	Node* next;
+	Node(int data)
+	{
+		this->data = data;
+		next = NULL;
+	}
+};
+
+class Queue{
+public:
+	int size;
+	Node* first;
+	Node* last;
+	Queue()
+	{
+		size = 0;
+		first = NULL;
+		last = NULL;
+	}
+	void add(int data)
+	{
+		Node* node = new Node(data);
+		if (size == 0)
+		{
+			first = node;
+			last = node;
+		}
+		else{
+			last->next = node;
+			last = last->next;
+		}
+		size++;
+	}
+	Node* dequeue()
+	{
+		Node* temp = first;
+		if (size == 0)
+		{
+			return NULL;
+		}
+		else if (size == 1)
+		{
+			first = NULL;
+			last = NULL;
+		}
+		else
+		{
+			first = first->next;
+		}
+		size--;
+		return temp;
+	}
 };
 
 class PQData
@@ -159,7 +214,7 @@ public:
 		data[curr] = top;
 		return pop;
 	}
-	
+
 	void print_all()
 	{
 		for (int i = 1; i <= used; i++)
@@ -168,79 +223,7 @@ public:
 	}
 };
 
-int N, D, C;
-int Visit[MAXN];
-int CNum; // °¨¿°µÈ ÄÄÇ»ÅÍ ¼ö
-int CSec; // °¨¿°±îÁöÀÇ ÃÑ ½Ã°£
-MyVec* AdjList;
-PQueue* MinPQ;
-
-void Input()
-{
-	CNum = 0;
-	CSec = 0;
-	cin >> N >> D >> C;
-	AdjList = new MyVec[N + 1];
-	MinPQ = new PQueue();
-	for (int i = 0; i < D; i++)
-	{
-		int a, b, s;
-		// b -> a
-		cin >> a >> b >> s;
-		AdjList[b].push_back(a, s);
-	}
-
-	for (int i = 1; i <= N; i++)
-		Visit[i] = 0;
-}
-
-void BFS(int n, int t)
-{
-	MinPQ->enqueue(n, t);
-	while (MinPQ->used > 0)
-	{
-		PQData dat = MinPQ->dequeue();
-		int node = dat.node;
-		int time = dat.time;
-		if (Visit[node] == 1)
-			continue;
-
-		if (CSec < time)
-			CSec = time;
-		CNum++;
-		Visit[node] = 1;
-		for (int i = 0; i < AdjList[node].used; i++)
-		{
-			int nextnode = AdjList[node].node[i];
-			int nexttime = AdjList[node].time[i];
-			if (Visit[nextnode] != 1)
-				MinPQ->enqueue(nextnode, nexttime + time);
-		}
-	}
-}
-
-void Process()
-{
-	BFS(C, 0);
-	delete MinPQ;
-	delete[] AdjList;
-}
-
-void Output()
-{
-	cout << CNum << " " << CSec << endl;
-}
-
 int main()
 {
-	int t;
-	cin >> t;
-	while (t--)
-	{
-		Input();
-		Process();
-		Output();
-	}
-
 	return 0;
 }
