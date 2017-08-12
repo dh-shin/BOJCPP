@@ -71,6 +71,17 @@ private:
 
 };
 
+class Node{
+public:
+	int data;
+	Node* next;
+	Node(int data)
+	{
+		this->data = data;
+		next = NULL;
+	}
+};
+
 class Queue{
 public:
 	int size;
@@ -117,14 +128,89 @@ public:
 	}
 };
 
-class Node{
+class PQData
+{
 public:
-	int data;
-	Node* next;
-	Node(int data)
+	int node;
+	int time;
+	PQData(){
+	}
+	PQData(int n, int t)
 	{
-		this->data = data;
-		next = NULL;
+		node = n;
+		time = t;
+	}
+};
+
+class PQueue{
+public:
+	int size;
+	int used;
+	PQData* data;
+	PQueue()
+	{
+		size = 8;
+		used = 0;
+		data = new PQData[size + 1];
+	}
+
+	void enqueue(int n, int t)
+	{
+		used++;
+		if (used == size + 1)
+		{
+			PQData* temp = new PQData[size + 1];
+			for (int i = 1; i <= size; i++)
+				temp[i] = data[i];
+			delete[] data;
+			size *= 2;
+			data = new PQData[size];
+			for (int i = 1; i <= used; i++)
+				data[i] = temp[i];
+			delete[] temp;
+		}
+
+		data[used].node = n;
+		data[used].time = t;
+		int curr = used;
+		int par = curr / 2;
+		PQData currdat = data[curr];
+		while (curr != 1 && data[par].time > currdat.time){
+			data[curr] = data[par];
+			curr /= 2;
+			par = curr / 2;
+		}
+		data[curr] = currdat;
+	}
+
+	PQData dequeue()
+	{
+		int curr = 1;
+		PQData result = data[curr];
+		data[curr] = data[used];
+		used--;
+		PQData target = data[curr];
+		int child = curr * 2;
+		if (this->used >= child + 1 && data[child + 1].time < data[child].time)
+			child += 1;
+
+		while (this->used >= child && data[child].time < target.time)
+		{
+			data[curr] = data[child];
+			curr = child;
+			child = curr * 2;
+			if (this->used >= child + 1 && data[child + 1].time < data[child].time)
+				child += 1;
+		}
+		data[curr] = target;
+		return result;
+	}
+	
+	void print_all()
+	{
+		for (int i = 1; i <= used; i++)
+			cout << "(" << this->data[i].node << ", " << this->data[i].time << ") ";
+		cout << endl;
 	}
 };
 
@@ -134,21 +220,34 @@ int CNum; // 감염된 컴퓨터 수
 int CSec; // 감염까지의 총 시간
 DArray* AdjList;
 Queue* BFSQueue;
+PQueue* MinPQ;
 
 void Input()
 {
-	CNum = 1; // 자기 자신
+	CNum = 0;
 	CSec = 0;
 	cin >> N >> D >> C;
 	AdjList = new DArray[N + 1];
 	BFSQueue = new Queue();
+	MinPQ = new PQueue();
 	for (int i = 0; i < D; i++)
 	{
 		int a, b, s;
 		// b -> a
 		cin >> a >> b >> s;
 		AdjList[b].push_back(a, s);
+		//MinPQ.enqueue(a, s);
+		//MinPQ.print_all();
 	}
+
+	/*
+	while (MinPQ.used != 0)
+	{
+		PQData dat = MinPQ.dequeue();
+		cout << "Pop Result : (" << dat.node << ", " << dat.time << ")" << endl;
+	}
+	*/
+
 	for (int i = 1; i <= N; i++)
 	{
 		Visit[i] = 0;
@@ -158,13 +257,34 @@ void Input()
 
 void BFS(int n, int t)
 {
-	Visit[n] = 1;
+	MinPQ->enqueue(n, t);
+	while (MinPQ->used > 0)
+	{
+		PQData dat = MinPQ->dequeue();
+		int node = dat.node;
+		int time = dat.time;
+		if (Visit[node] == 1)
+			continue;
+
+		if (CSec < time)
+			CSec = time;
+		CNum++;
+		Visit[node] = 1;
+		for (int i = 0; i < AdjList[node].used; i++)
+		{
+			int nextnode = AdjList[node].node[i];
+			int nexttime = AdjList[node].time[i];
+			if (Visit[nextnode] != 1)
+				MinPQ->enqueue(nextnode, nexttime + time);
+		}
+	}
 }
 
 void Process()
 {
 	BFS(C, 0);
 	delete BFSQueue;
+	delete MinPQ;
 	delete[] AdjList;
 }
 
