@@ -198,7 +198,7 @@ void Input()
 	while (k--)
 	{
 		char op[3];
-		int num;
+		long long int num;
 		cin >> op >> num;
 		if (op[0] == 'I')
 		{
@@ -231,7 +231,7 @@ void Input()
 			{
 				QItem* item = minQ->dequeue();
 				while (item != NULL && visit[item->idx] == 1)
-					item = maxQ->dequeue();
+					item = minQ->dequeue();
 				
 				if (item == NULL)
 					continue;
@@ -249,7 +249,7 @@ void Input()
 		max_item = maxQ->dequeue();
 	QItem* min_item = minQ->dequeue();
 	while (min_item != NULL && visit[min_item->idx] == 1)
-		min_item = maxQ->dequeue();
+		min_item = minQ->dequeue();
 
 	if (max_item == NULL && min_item == NULL)
 		cout << "EMPTY" << endl;
@@ -266,7 +266,7 @@ int main()
 
 	int t;
 	cin >> t;
-	while (t--)
+	for (int i = 1; i <= t; i++)
 	{
 		Input();
 	}
