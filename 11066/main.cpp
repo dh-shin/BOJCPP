@@ -1,39 +1,65 @@
 #include <iostream>
-#include <cstring>
 using namespace std;
 
 #define MAXK 501
-int minv[MAXK];
-int sumv[MAXK];
+
+int k;
+int num[MAXK];
+int C[MAXK][MAXK];
+int cost;
+
+void Input()
+{
+	cin >> k;
+	for (int i = 1; i <= k; i++)
+	{
+		cin >> num[i];
+		for (int j = 1; j <= k; j++)
+			C[i][j] = 0;
+	}
+}
+
+int GetC(int a, int b)
+{
+	if (a != b && C[a][b] == 0)
+	{
+		int sum = 0;
+		for (int i = a; i <= b; i++)
+			sum += num[i];
+		int min = 987654321;
+		for (int i = a; i < b; i++)
+		{
+			int val = GetC(a, i) + GetC(i + 1, b);
+			if (val < min)
+				min = val;
+		}
+		sum += min;
+		C[a][b] = sum;
+	}
+	return C[a][b];
+}
+
+void Process()
+{
+	cost = GetC(1, k);
+}
+
+void Output()
+{
+	cout << cost << endl;
+}
 
 int main()
 {
-	int n, k;
-	cin >> n;
-	while (n--)
+	ios::sync_with_stdio(false);
+	int t;
+	cin >> t;
+	while (t--)
 	{
-		cin >> k;
-		memset(minv, 0, sizeof(minv));
-		memset(sumv, 0, sizeof(sumv));
-		int curr, prev;
-		cin >> curr;
-		minv[1] = sumv[1] = curr;
-		cin >> curr;
-		minv[2] = sumv[2] = sumv[1] + curr;
- 		for (int i = 3; i <= k; i++)
-		{
-			prev = curr;
-
-			int a = sumv[i - 2] + (prev + curr) * 2;
-			int b = sumv[i - 1] + curr;
-			if ( a > b )	
-				minv[i] = b;
-			else
-				minv[i] = a;
-		}
-		cout << minv[k] << endl;
+		Input();
+		Process();
+		Output();
 	}
-	cin >> n;
 
 	return 0;
 }
