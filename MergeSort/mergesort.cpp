@@ -36,7 +36,7 @@ void MergeSort(int s, int e)
 		return;
 
 	int c = (s + e) / 2;
-	
+
 	MergeSort(s, c);
 	MergeSort(c + 1, e);
 
