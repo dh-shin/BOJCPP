@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1000", "1000\1000.vcxproj", "{D3232867-A2C0-4A2A-9DF9-F430DEE22776}"
 EndProject
@@ -164,6 +164,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "1158", "1158\1158.vcxproj", "{F6CA34AD-C403-4FFC-A50B-AC2CE668A75F}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "5052", "5052\5052.vcxproj", "{D762F306-EC61-4406-A1E8-1226141525E8}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HeldKarp", "HeldKarp\HeldKarp.vcxproj", "{F97BA159-F871-44D2-9661-CAE566C27AC6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -1495,6 +1497,22 @@ Global
 		{D762F306-EC61-4406-A1E8-1226141525E8}.Release|x64.ActiveCfg = Release|Win32
 		{D762F306-EC61-4406-A1E8-1226141525E8}.Release|x86.ActiveCfg = Release|Win32
 		{D762F306-EC61-4406-A1E8-1226141525E8}.Release|x86.Build.0 = Release|Win32
+		{F97BA159-F871-44D2-9661-CAE566C27AC6}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{F97BA159-F871-44D2-9661-CAE566C27AC6}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{F97BA159-F871-44D2-9661-CAE566C27AC6}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{F97BA159-F871-44D2-9661-CAE566C27AC6}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F97BA159-F871-44D2-9661-CAE566C27AC6}.Debug|Win32.Build.0 = Debug|Win32
+		{F97BA159-F871-44D2-9661-CAE566C27AC6}.Debug|x64.ActiveCfg = Debug|Win32
+		{F97BA159-F871-44D2-9661-CAE566C27AC6}.Debug|x86.ActiveCfg = Debug|Win32
+		{F97BA159-F871-44D2-9661-CAE566C27AC6}.Debug|x86.Build.0 = Debug|Win32
+		{F97BA159-F871-44D2-9661-CAE566C27AC6}.Release|Any CPU.ActiveCfg = Release|Win32
+		{F97BA159-F871-44D2-9661-CAE566C27AC6}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{F97BA159-F871-44D2-9661-CAE566C27AC6}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{F97BA159-F871-44D2-9661-CAE566C27AC6}.Release|Win32.ActiveCfg = Release|Win32
+		{F97BA159-F871-44D2-9661-CAE566C27AC6}.Release|Win32.Build.0 = Release|Win32
+		{F97BA159-F871-44D2-9661-CAE566C27AC6}.Release|x64.ActiveCfg = Release|Win32
+		{F97BA159-F871-44D2-9661-CAE566C27AC6}.Release|x86.ActiveCfg = Release|Win32
+		{F97BA159-F871-44D2-9661-CAE566C27AC6}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
