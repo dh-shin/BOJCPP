@@ -1,92 +1,130 @@
 #include <iostream>
 using namespace std;
 
-#define MAXN 19
+#define MAXN 40
+#define MAXS 13
 #define IMP 0x7fffffff
 
-int N;
-int cost[MAXN][MAXN];
-int D[1 << MAXN][MAXN];
-int Result;
+class Location{
+public:
+	int r;
+	int c;
+};
 
-void Input()
+class Queue{
+public:
+	int r;
+	int c;
+	int step;
+};
+
+int N, C;
+int map[MAXN + 1][MAXN + 1];
+int node_num;
+Location nodes[MAXS + 2];
+int cost[MAXS + 2][MAXS + 2];
+int visit[MAXS + 2][MAXS + 2];
+
+Queue queue[MAXN * MAXN];
+int front, rear;
+
+void BFS(int loc)
 {
-	cin >> N;
-	for (int i = 0; i < N; i++)
+	for (int i = 0; i < MAXS + 2; i++)
+		for (int j = 0; j < MAXS + 2; j++)
+			visit[i][j] = 0;
+
+	front = 0;
+	rear = 0;
+
+	int dr[] = { 0, 0, 1, -1 };
+	int dc[] = { 1, -1, 0, 0 };
+
+	Queue data;
+	Queue ndata;
+
+	data.r = nodes[loc].r;
+	data.c = nodes[loc].c;
+	data.step = 0;
+
+	queue[front++] = data;
+	visit[nodes[loc].r][nodes[loc].c] = 1;
+
+	while (front < rear)
 	{
-		for (int j = 0; j < N; j++)
+		data = queue[rear++];
+
+		for (int i = 0; i < 4; i++)
 		{
-			cin >> cost[i][j];
-			if (cost[i][j] == 0) cost[i][j] = IMP;
-		}
-	}
-}
+			ndata.r = data.r + dr[i];
+			ndata.c = data.c + dc[i];
+			ndata.step = data.step + 1;
 
-void Init_Dynamic()
-{
-	for (int i = 1; i < N; i++)
-		D[1 | (1 << i)][i] = cost[0][i];
-}
-
-#define Bit_Check(bits, i) ((bits) & (1<<(i)))
-#define Bit_Clear(bits, i) ((bits) & ~(1<<(i)))
-
-int Do_Dynamic()
-{
-	int allvisit = (1 << N) - 1;
-	int prevbits, mincost;
-	for (int bits = 3; bits <= allvisit; bits += 2)
-	{
-		for (int last = 1; last < N; last++)
-		{
-			if (Bit_Check(bits, last) == 0) continue; // last를 방문한 적이 없는 경우
-			if (D[bits][last] != 0) continue; // 이미 Init_Dynamic에서 계산한 경우
-
-			D[bits][last] = IMP;
-			prevbits = Bit_Clear(bits, last);
-
-			for (int prevlast = 1; prevlast < N; prevlast++)
+			if (map[ndata.r][ndata.c] != 1 && visit[ndata.r][ndata.c] == 0)
 			{
-				if (Bit_Check(prevbits, prevlast) == 0) continue; // 상태가 성립되지 않는 경우
-				if (D[prevbits][prevlast] == IMP) continue; // 이전 상태가 되기 불가능한 경우
-				if (cost[prevlast][last] == IMP) continue; // 이전 상태에서 현재 상태로 되기 불가능한 경우
-
-				if (D[bits][last] > D[prevbits][prevlast] + cost[prevlast][last])
-				{
-					D[bits][last] = D[prevbits][prevlast] + cost[prevlast][last];
-				}
+				queue[front++] = ndata;
+				visit[ndata.r][ndata.c] = ndata.step;
 			}
 		}
 	}
 
-	mincost = IMP;
-	for (int last = 1; last < N; last++)
+	for (int i = 0; i < node_num; i++)
 	{
-		if (cost[last][0] == IMP) continue;
-		if (D[allvisit][last] == IMP) continue;
-		if (D[allvisit][last] + cost[last][0] < mincost)
-			mincost = D[allvisit][last] + cost[last][0];
+		if (visit[nodes[loc].r][nodes[loc].c] == 0 || i == loc)
+			cost[loc][i] = cost[i][loc] = IMP;
+		else
+			cost[loc][i] = cost[i][loc] = visit[nodes[loc].r][nodes[loc].c];
 	}
-
-	return mincost;
 }
 
-void Process()
+void Make_Cost()
 {
-	Init_Dynamic();
-	Result = Do_Dynamic();
+	for (int i = 0; i < node_num; i++)
+		BFS(i);
 }
 
-void Output()
+int Bit_Count(int bits)
 {
-	cout << Result << endl;
+	int cnt = 0;
+	while (bits > 0)
+	{
+		if ((bits & 1) == 1) cnt++;
+		bits >>= 1;
+	}
+	return cnt;
+}
+
+#define Bit_Check (bits, n) ((bits) & (1 << (n)))
+#define Bit_Clear (bits, n) ((bits) & ~(1 << (n)))
+
+void Input()
+{
+	cin >> N >> C;
+	int nidx = 1;
+	Location dst;
+	for (int i = 1; i <= N; i++)
+	{
+		for (int j = 1; j <= N; j++)
+		{
+			cin >> map[i][j];
+			Location node;
+			node.r = i;
+			node.c = j;
+
+			if (map[i][j] == 2) nodes[0] = node; // 나자연씨 집
+			else if (map[i][j] == 3) nodes[nidx++] = node; // 학생 집
+			else if (map[i][j] == 4) dst = node; // 어린이 집
+		}
+	}
+	nodes[nidx++] = dst;
+	node_num = nidx;
+
+	Make_Cost();
 }
 
 int main()
 {
 	Input();
-	Process();
-	Output();
 
 	return 0;
 }
