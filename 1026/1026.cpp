@@ -7,7 +7,6 @@ using namespace std;
 int N;
 int A[MAXN + 1];
 int B[MAXN + 1];
-int Count[LIMIT + 1];
 
 int main()
 {
@@ -25,7 +24,7 @@ int main()
 	}
 
 	int sum = 0;
-	int idxa = 0, idxb = 100;
+	int idxa = 0, idxb = LIMIT;
 	for (int i = 1; i <= N; i++)
 	{
 		while (1)
@@ -46,6 +45,7 @@ int main()
 			}
 			idxb--;
 		}
+		cout << idxa << " " << idxb << endl;
 		sum += idxa * idxb;
 	}
 
